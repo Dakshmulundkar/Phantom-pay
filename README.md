@@ -2,6 +2,31 @@
 
 A secure and efficient payroll management system built with Flask and Google's Generative AI.
 
+## Project Description
+
+Phantom Pay is an advanced payroll management system designed to streamline and secure the payroll process for businesses of all sizes. Leveraging the power of Google's Generative AI, this system provides intelligent insights and automation capabilities to make payroll management more efficient and error-free.
+
+### Key Features
+- **AI-Powered Analysis**: Utilizes Google's Generative AI to analyze payroll patterns and provide intelligent insights
+- **Secure Data Management**: Implements robust security measures to protect sensitive employee and financial data
+- **Automated Calculations**: Handles complex payroll calculations including taxes, deductions, and benefits automatically
+- **User-Friendly Interface**: Intuitive dashboard for easy navigation and management
+- **Comprehensive Reporting**: Generates detailed reports for payroll analysis and compliance
+- **Multi-User Support**: Role-based access control for different levels of users (admin, HR, managers)
+
+### Technology Stack
+- **Backend**: Flask (Python web framework)
+- **Database**: SQLAlchemy with Flask-SQLAlchemy
+- **AI Integration**: Google Generative AI
+- **Data Processing**: Pandas for efficient data manipulation
+- **Frontend**: Modern web interface with responsive design
+
+### Use Cases
+- Small to medium-sized businesses looking to automate their payroll process
+- HR departments seeking to reduce manual workload
+- Companies requiring secure and compliant payroll management
+- Organizations wanting to leverage AI for payroll insights and optimization
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
