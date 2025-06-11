@@ -30,16 +30,16 @@ Phantom Pay is an advanced payroll management system designed to streamline and 
 ### System Visualizations
 
 #### 1. Risk Distribution Analysis
-![Risk Distribution](static/images/riskdistribution.jpg)
-*Visual representation of risk distribution across different payroll parameters*
+<img src="static/images/riskdistribution.jpg" alt="Risk Distribution" width="500">
+Visual representation of risk distribution across different payroll parameters
 
 #### 2. Anomaly Trends
-![Anomaly Trends](static/images/AnomalyTrends.jpg)
-*Analysis of anomaly trends over time in payroll data*
+<img src="static/images/AnomalyTrends.jpg" alt="Anomaly Trends" width="500">
+Analysis of anomaly trends over time in payroll data
 
 #### 3. Detected Anomalies
-![Detected Anomalies](static/images/Detectedanomalies.jpg)
-*Detailed view of detected anomalies in the payroll system*
+<img src="static/images/Detectedanomalies.jpg" alt="Detected Anomalies" width="500">
+Detailed view of detected anomalies in the payroll system
 
 ## Prerequisites
 
