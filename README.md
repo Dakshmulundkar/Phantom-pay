@@ -27,6 +27,20 @@ Phantom Pay is an advanced payroll management system designed to streamline and 
 - Companies requiring secure and compliant payroll management
 - Organizations wanting to leverage AI for payroll insights and optimization
 
+### System Visualizations
+
+#### 1. Risk Distribution Analysis
+![Risk Distribution](static/images/riskdistribution.jpg)
+*Visual representation of risk distribution across different payroll parameters*
+
+#### 2. Anomaly Trends
+![Anomaly Trends](static/images/AnomalyTrends.jpg)
+*Analysis of anomaly trends over time in payroll data*
+
+#### 3. Detected Anomalies
+![Detected Anomalies](static/images/Detectedanomalies.jpg)
+*Detailed view of detected anomalies in the payroll system*
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
