@@ -20,6 +20,7 @@ Phantom Pay is an advanced payroll management system designed to streamline and 
 - **AI Integration**: Google Generative AI
 - **Data Processing**: Pandas for efficient data manipulation
 - **Frontend**: Modern web interface with responsive design
+- **Authentication**: Firebase Authentication for secure user management
 
 ### Use Cases
 - Small to medium-sized businesses looking to automate their payroll process
