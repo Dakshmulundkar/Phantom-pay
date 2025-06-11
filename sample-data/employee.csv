@@ -1,0 +1,7 @@
+emp_id,employee_name,department,designation,joining_date,employment_status,base_salary,cost_center,reporting_manager,employee_type,location
+E001,John Doe,IT,Engineer,2022-01-10,Active,60000,CC101,Alice,Permanent,Mumbai
+E002,Jane Smith,HR,Manager,2021-05-15,Active,80000,CC102,Bob,Permanent,Mumbai
+E003,Ali Khan,Finance,Analyst,2022-03-01,Active,55000,CC103,Charlie,Permanent,Mumbai
+E004,Ghost Emp1,Sales,Executive,2023-01-01,Active,45000,CC104,Ghost Manager,Contract,Delhi
+E005,Ghost Emp2,Operations,Clerk,2023-01-01,Active,40000,CC105,Ghost Manager,Contract,Delhi
+E006,Emily White,IT,Support,2020-11-20,Active,50000,CC101,Alice,Permanent,Mumbai
