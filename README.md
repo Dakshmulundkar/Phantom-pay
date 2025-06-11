@@ -42,6 +42,10 @@ Analysis of anomaly trends over time in payroll data
 <img src="static/images/Detectedanomalies.jpg" alt="Detected Anomalies" width="500">
 Detailed view of detected anomalies in the payroll system
 
+#### 4. Firebase Authentication
+<img src="static/images/firebase.jpg" alt="Firebase Authentication" width="500">
+Secure user authentication and management system powered by Firebase
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
