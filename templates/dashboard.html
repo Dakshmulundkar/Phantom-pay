@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Added libraries for PDF download functionality -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
@@ -45,6 +46,7 @@
 <body class="min-h-screen bg-gray-950">
     <main class="p-6">
         <div class="max-w-7xl mx-auto">
+            <!-- Header -->
             <div class="mb-8 flex items-center justify-between">
                 <div>
                     <h1 class="text-3xl font-bold text-white mb-2">
@@ -55,11 +57,13 @@
                     </p>
                 </div>
 
+                <!-- Sign Out Button -->
                 <button id="logoutBtn" class="px-6 py-2 text-sm text-black bg-yellow-400 hover:bg-yellow-500 rounded-md transition duration-150 font-semibold">
                     Sign Out
                 </button>
             </div>
 
+            <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="shadow-xl bg-gray-800 border-0 rounded-lg">
                     <div class="p-6">
@@ -108,7 +112,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-100">Data Accuracy</p>
-                                <p class="text-2xl font-bold text-primary-400" id="dataAccuracy">...</p>
+                                <p class="text-2xl font-bold text-primary-400" id="dataAccuracy">99.8%</p>
                             </div>
                             <div class="bg-gradient-to-br from-primary-400 to-primary-500 p-3 rounded-full">
                                 <i data-lucide="trending-up" class="h-6 w-6 text-white"></i>
@@ -118,6 +122,7 @@
                 </div>
             </div>
 
+            <!-- Alert Banner -->
             <div id="alertBanner" class="mb-8 hidden">
                 <div class="border-warning-600 bg-warning-900/20 rounded-lg p-4 flex items-center">
                     <i data-lucide="circle-alert" class="h-4 w-4 text-warning-400 mr-2"></i>
@@ -127,7 +132,9 @@
                 </div>
             </div>
 
+            <!-- Main Content Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Data Upload Center -->
                 <div class="lg:col-span-2">
                     <div class="shadow-xl bg-gray-100 border-0 rounded-lg">
                         <div class="p-6">
@@ -136,24 +143,28 @@
                                 Data Upload Center
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <!-- Employee Master Data -->
                                 <div class="bg-gray-800 rounded-lg flex flex-col items-center justify-center p-6 cursor-pointer group transition" onclick="triggerUpload('employee')">
                                     <i data-lucide="file-text" class="h-10 w-10 text-gray-200 mb-3 group-hover:text-blue-600 transition"></i>
                                     <div class="text-white font-semibold text-lg mb-1">Employee Master Data</div>
                                     <div class="text-gray-300 text-sm">Upload employee records CSV</div>
                                     <input type="file" id="upload-employee" class="hidden" accept=".csv" />
                                 </div>
+                                <!-- Attendance Logs -->
                                 <div class="bg-gray-800 rounded-lg flex flex-col items-center justify-center p-6 cursor-pointer group transition" onclick="triggerUpload('attendance')">
                                     <i data-lucide="clock" class="h-10 w-10 text-gray-200 mb-3 group-hover:text-green-600 transition"></i>
                                     <div class="text-white font-semibold text-lg mb-1">Attendance Logs</div>
                                     <div class="text-gray-300 text-sm">Upload attendance records</div>
                                     <input type="file" id="upload-attendance" class="hidden" accept=".csv" />
                                 </div>
+                                <!-- Salary History -->
                                 <div class="bg-gray-800 rounded-lg flex flex-col items-center justify-center p-6 cursor-pointer group transition" onclick="triggerUpload('salary')">
                                     <i data-lucide="dollar-sign" class="h-10 w-10 text-gray-200 mb-3 group-hover:text-purple-600 transition"></i>
                                     <div class="text-white font-semibold text-lg mb-1">Salary History</div>
                                     <div class="text-gray-300 text-sm">Upload payroll data</div>
                                     <input type="file" id="upload-salary" class="hidden" accept=".csv" />
                                 </div>
+                                <!-- Wi-Fi Session Logs -->
                                 <div class="bg-gray-800 rounded-lg flex flex-col items-center justify-center p-6 cursor-pointer group transition" onclick="triggerUpload('wifi')">
                                     <i data-lucide="wifi" class="h-10 w-10 text-gray-200 mb-3 group-hover:text-orange-500 transition"></i>
                                     <div class="text-white font-semibold text-lg mb-1">Wi-Fi Session Logs</div>
@@ -161,6 +172,7 @@
                                     <input type="file" id="upload-wifi" class="hidden" accept=".csv" />
                                 </div>
                             </div>
+                            <!-- Processing Status Bar -->
                             <div class="bg-gray-900 rounded-lg p-4 mt-2 mb-6">
                                 <div class="flex items-center justify-between mb-2">
                                     <span class="text-white font-semibold text-sm">Processing Status</span>
@@ -182,6 +194,7 @@
                     </div>
                 </div>
 
+                <!-- Recent Activity -->
                 <div>
                     <div class="shadow-xl bg-gray-800 border-0 rounded-lg mb-6">
                         <div class="p-6">
@@ -189,9 +202,11 @@
                             <ul id="activityFeed" class="space-y-4"></ul>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Anomaly Detection Results (report container) -->
             <div id="report-container" class="shadow-xl bg-gray-800 border-0 rounded-lg mb-8">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
@@ -199,12 +214,14 @@
                             <i data-lucide="alert-triangle" class="h-5 w-5 text-primary-400 mr-2"></i>
                             Detected Anomalies
                         </h2>
+                        <!-- Modified button for downloading -->
                         <button id="downloadReportBtn" class="border border-gray-600 text-gray-100 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">
                             Download Report
                         </button>
                     </div>
                     <div id="summary" class="text-white mb-4"></div>
 
+                    <!-- Filter Controls -->
                     <div class="flex items-center space-x-4 mb-4">
                         <input type="text" id="searchInput" placeholder="Search by name or ID..." class="bg-gray-700 text-white placeholder-gray-400 border border-gray-600 rounded-md px-3 py-2 text-sm focus:ring-primary-500 focus:border-primary-500 w-full md:w-1/3">
                         
@@ -234,7 +251,9 @@
                 </div>
             </div>
 
+            <!-- Analytics Charts -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Anomaly Trends -->
                 <div class="bg-gray-800 rounded-lg p-4">
                     <h3 class="text-lg font-semibold text-white mb-2">Anomaly Trends</h3>
                     <div class="h-48">
@@ -242,6 +261,7 @@
                     </div>
                 </div>
 
+                <!-- Risk Distribution -->
                 <div class="bg-gray-800 rounded-lg p-4">
                     <h3 class="text-lg font-semibold text-white mb-2">Risk Distribution</h3>
                     <div class="h-48">
@@ -250,6 +270,7 @@
                 </div>
             </div>
 
+            <!-- Anomaly Type Distribution Chart -->
             <div class="bg-gray-800 rounded-lg p-4 mb-8">
                 <h3 class="text-lg font-semibold text-white mb-2">Anomaly Type Distribution</h3>
                 <div class="h-64">
@@ -260,389 +281,368 @@
     </main>
 
     <script>
-        function triggerUpload(type) {
-            document.getElementById('upload-' + type).click();
+    // --- THIS IS THE FIX ---
+    // This function MUST be in the global scope for the onclick="" attribute in the HTML to find it.
+    function triggerUpload(type) {
+        document.getElementById('upload-' + type).click();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Lucide icons
+        lucide.createIcons();
+
+        // Track upload status
+        const requiredFiles = ['employee', 'attendance', 'salary', 'wifi'];
+        let uploadedFiles = {};
+        let employeeMasterData = new Map(); // Store employee master data
+        let lastAnalysisData = null; // Store full analysis results
+
+        // Initialize charts
+        let trendsChart = null;
+        let riskChart = null;
+        let typeChart = null; // New chart instance
+        
+        // Add event listeners
+        document.getElementById('analyze-btn').addEventListener('click', analyze);
+        document.getElementById('downloadReportBtn').addEventListener('click', function () {
+    fetch('/api/download-report')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Failed to generate report. Make sure all files are uploaded and analysis was run.");
+        }
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "Phantompay.pdf";
+        a.click();
+      })
+      .catch(err => {
+        alert("❌ " + err.message);
+      });
+});
+
+        document.getElementById('searchInput').addEventListener('input', renderAnomaliesTable);
+        document.getElementById('riskFilter').addEventListener('change', renderAnomaliesTable);
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            window.location.href = '/logout'; // Redirect to the Flask logout route
+        });
+
+        // Initialize dashboard on load
+        fetchDashboardData();
+        fetchRecentUploads();
+
+        // --- NEW FEATURE: Animate Stat Numbers ---
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentValue = Math.floor(progress * (end - start) + start);
+                
+                if (element.id === 'potentialSavings') {
+                    element.innerHTML = `$${currentValue.toLocaleString()}`;
+                } else {
+                    element.innerHTML = currentValue.toLocaleString();
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
+        // --- NEW FEATURE: Anomaly Table Filtering ---
+        function renderAnomaliesTable() {
+            if (!lastAnalysisData || !lastAnalysisData.anomalies) return;
 
-            const requiredFiles = ['employee', 'attendance', 'salary', 'wifi'];
-            let uploadedFiles = {};
-            let employeeMasterData = new Map();
-            let lastAnalysisData = null;
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const riskValue = document.getElementById('riskFilter').value;
 
-            let trendsChart = null;
-            let riskChart = null;
-            let typeChart = null;
-
-            document.getElementById('analyze-btn').addEventListener('click', analyze);
-            document.getElementById('downloadReportBtn').addEventListener('click', generateSimpleReport);
-            document.getElementById('searchInput').addEventListener('input', renderAnomaliesTable);
-            document.getElementById('riskFilter').addEventListener('change', renderAnomaliesTable);
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-                window.location.href = '/logout';
+            const filteredAnomalies = lastAnalysisData.anomalies.filter(anomaly => {
+                const searchMatch = !searchValue || 
+                                    (anomaly.name && anomaly.name.toLowerCase().includes(searchValue)) ||
+                                    (anomaly.emp_id && anomaly.emp_id.toLowerCase().includes(searchValue));
+                const riskMatch = !riskValue || anomaly.risk_level === riskValue;
+                return searchMatch && riskMatch;
             });
-
-            fetchDashboardData();
-            fetchRecentUploads();
-
-            function animateValue(element, start, end, duration) {
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const currentValue = Math.floor(progress * (end - start) + start);
-                    
-                    if (element.id === 'potentialSavings') {
-                        element.innerHTML = `$${currentValue.toLocaleString()}`;
-                    } else {
-                        element.innerHTML = currentValue.toLocaleString();
-                    }
-                    
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            }
-
-            function renderAnomaliesTable() {
-                if (!lastAnalysisData || !lastAnalysisData.anomalies) return;
-
-                const searchValue = document.getElementById('searchInput').value.toLowerCase();
-                const riskValue = document.getElementById('riskFilter').value;
-
-                const filteredAnomalies = lastAnalysisData.anomalies.filter(anomaly => {
-                    const searchMatch = !searchValue || 
-                                        (anomaly.name && anomaly.name.toLowerCase().includes(searchValue)) ||
-                                        (anomaly.emp_id && anomaly.emp_id.toLowerCase().includes(searchValue));
-                    const riskMatch = !riskValue || anomaly.risk_level === riskValue;
-                    return searchMatch && riskMatch;
-                });
-                
-                const tbody = document.querySelector('#anomalies-table tbody');
-                tbody.innerHTML = '';
-                
-                if (filteredAnomalies.length > 0) {
-                    filteredAnomalies.forEach(anomaly => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.emp_id || ''}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.name || ''}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.type || ''}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                <span class="px-2 py-1 rounded-full text-xs font-semibold ${
-                                    anomaly.risk_level === 'high' ? 'bg-error-500/20 text-error-400' :
-                                    anomaly.risk_level === 'medium' ? 'bg-warning-500/20 text-warning-400' :
-                                    'bg-success-500/20 text-success-400'
-                                }">${anomaly.risk_level || 'unknown'}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.status || 'pending'}</td>
-                            <td class="px-6 py-4 text-sm text-gray-100">${anomaly.recommendation || ''}</td>
-                        `;
-                        tbody.appendChild(row);
-                    });
-                } else {
+            
+            const tbody = document.querySelector('#anomalies-table tbody');
+            tbody.innerHTML = '';
+            
+            if (filteredAnomalies.length > 0) {
+                filteredAnomalies.forEach(anomaly => {
                     const row = document.createElement('tr');
-                    row.innerHTML = '<td colspan="6" class="px-6 py-4 text-center text-sm text-gray-100">No matching anomalies found</td>';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.emp_id || ''}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.name || ''}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.type || ''}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold ${
+                                anomaly.risk_level === 'high' ? 'bg-error-500/20 text-error-400' :
+                                anomaly.risk_level === 'medium' ? 'bg-warning-500/20 text-warning-400' :
+                                'bg-success-500/20 text-success-400'
+                            }">${anomaly.risk_level || 'unknown'}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-100">${anomaly.status || 'pending'}</td>
+                        <td class="px-6 py-4 text-sm text-gray-100">${anomaly.recommendation || ''}</td>
+                    `;
                     tbody.appendChild(row);
-                }
-            }
-
-            function generateSimpleReport() {
-                const downloadButton = document.getElementById('downloadReportBtn');
-                const reportContainer = document.getElementById('report-container');
-
-                if (!window.html2canvas || !window.jspdf) {
-                    console.error('Download failed: html2canvas or jspdf library not found.');
-                    alert('Could not generate PDF. A required library is missing.');
-                    return;
-                }
-
-                const originalButtonText = downloadButton.textContent;
-                downloadButton.disabled = true;
-                downloadButton.textContent = 'Generating...';
-
-                html2canvas(reportContainer, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#1f2937'
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF({
-                        orientation: 'landscape',
-                        unit: 'pt',
-                        format: 'a4'
-                    });
-
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-                    const canvasAspectRatio = canvas.width / canvas.height;
-                    const margin = 40;
-                    const usableWidth = pdfWidth - margin;
-                    const usableHeight = pdfHeight - margin;
-
-                    let finalWidth, finalHeight;
-                    if (canvasAspectRatio > (usableWidth / usableHeight)) {
-                        finalWidth = usableWidth;
-                        finalHeight = finalWidth / canvasAspectRatio;
-                    } else {
-                        finalHeight = usableHeight;
-                        finalWidth = finalHeight * canvasAspectRatio;
-                    }
-                    
-                    const x = (pdfWidth - finalWidth) / 2;
-                    const y = (pdfHeight - finalHeight) / 2;
-
-                    pdf.addImage(imgData, 'PNG', x, y, finalWidth, finalHeight);
-                    pdf.save('phantom-pay-analysis-report.pdf');
-                }).catch(error => {
-                    console.error('Error generating PDF:', error);
-                    alert('An error occurred while generating the report.');
-                }).finally(() => {
-                    downloadButton.disabled = false;
-                    downloadButton.textContent = originalButtonText;
                 });
+            } else {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="6" class="px-6 py-4 text-center text-sm text-gray-100">No matching anomalies found</td>';
+                tbody.appendChild(row);
             }
+        }
 
-            function updateProgressBar() {
-                const uploadedCount = Object.keys(uploadedFiles).length;
-                const percent = (uploadedCount / requiredFiles.length) * 100;
-                document.getElementById('progress-bar').style.width = percent + '%';
-                const statusText = uploadedCount === 4
-                    ? 'Data uploaded and ready for AI analysis'
-                    : `Uploaded ${uploadedCount}/4 files`;
-                document.getElementById('progress-status').textContent = statusText;
-                document.getElementById('progress-status').className = uploadedCount === 4 ? 'flex items-center text-green-400 text-sm' : 'flex items-center text-blue-400 text-sm';
-                document.getElementById('analyze-btn').disabled = uploadedCount !== 4;
-            }
 
-            requiredFiles.forEach(type => {
-                const input = document.getElementById('upload-' + type);
-                input.addEventListener('change', async function() {
-                    if (!input.files.length) return;
-                    const file = input.files[0];
-                    const formData = new FormData();
-                    formData.append('file', file);
-                    const res = await fetch(`/api/upload/${type}`, {
-                        method: 'POST',
-                        body: formData
-                    });
-                    if (res.ok) {
-                        uploadedFiles[type] = true;
-                        updateProgressBar();
-                        
-                        if (type === 'employee') {
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                const text = e.target.result;
-                                const rows = text.split('\n').filter(row => row.trim() !== '');
-                                const headers = rows[0].split(',');
-                                const salaryIndex = headers.findIndex(h => h.toLowerCase().includes('salary'));
-                                const idIndex = headers.findIndex(h => h.toLowerCase().includes('id'));
-                                
-                                for (let i = 1; i < rows.length; i++) {
-                                    const values = rows[i].split(',');
-                                    if (values[idIndex] && values[salaryIndex]) {
-                                        employeeMasterData.set(values[idIndex], parseFloat(values[salaryIndex]) || 0);
-                                    }
+        // Update progress bar and status
+        function updateProgressBar() {
+            const uploadedCount = Object.keys(uploadedFiles).length;
+            const percent = (uploadedCount / requiredFiles.length) * 100;
+            document.getElementById('progress-bar').style.width = percent + '%';
+            const statusText = uploadedCount === 4
+                ? 'Data uploaded and ready for AI analysis'
+                : `Uploaded ${uploadedCount}/4 files`;
+            document.getElementById('progress-status').textContent = statusText;
+            document.getElementById('progress-status').className = uploadedCount === 4 ? 'flex items-center text-green-400 text-sm' : 'flex items-center text-blue-400 text-sm';
+            document.getElementById('analyze-btn').disabled = uploadedCount !== 4;
+        }
+        
+        // Handle file input change and upload
+        requiredFiles.forEach(type => {
+            const input = document.getElementById('upload-' + type);
+            input.addEventListener('change', async function() {
+                if (!input.files.length) return;
+                const file = input.files[0];
+                const formData = new FormData();
+                formData.append('file', file);
+                const res = await fetch(`/api/upload/${type}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                if (res.ok) {
+                    uploadedFiles[type] = true;
+                    updateProgressBar();
+                    
+                    if (type === 'employee') {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const text = e.target.result;
+                            const rows = text.split('\n').filter(row => row.trim() !== '');
+                            const headers = rows[0].split(',');
+                            const salaryIndex = headers.findIndex(h => h.toLowerCase().includes('salary'));
+                            const idIndex = headers.findIndex(h => h.toLowerCase().includes('id'));
+                            
+                            for (let i = 1; i < rows.length; i++) {
+                                const values = rows[i].split(',');
+                                if (values[idIndex] && values[salaryIndex]) {
+                                    employeeMasterData.set(values[idIndex], parseFloat(values[salaryIndex]) || 0);
                                 }
-                                
-                                const employeeCount = rows.length > 0 ? rows.length - 1 : 0;
-                                document.getElementById('totalEmployees').textContent = employeeCount;
-                            };
-                            reader.readAsText(file);
-                        }
-                    } else {
-                        alert('Failed to upload ' + type + ' file.');
+                            }
+                            
+                            const employeeCount = rows.length > 0 ? rows.length - 1 : 0;
+                            document.getElementById('totalEmployees').textContent = employeeCount;
+                        };
+                        reader.readAsText(file);
                     }
-                });
+                } else {
+                    alert('Failed to upload ' + type + ' file.');
+                }
             });
-
-            function initTypeChart(anomaliesData) {
-                const ctx = document.getElementById('typeChart').getContext('2d');
-                if (typeChart) {
-                    typeChart.destroy();
-                }
-
-                const typeCounts = {};
-                if (anomaliesData && anomaliesData.length > 0) {
-                    anomaliesData.forEach(anomaly => {
-                        const type = anomaly.type || 'Unknown';
-                        typeCounts[type] = (typeCounts[type] || 0) + 1;
-                    });
-                }
-
-                const labels = Object.keys(typeCounts);
-                const data = Object.values(typeCounts);
-
-                typeChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Count of Anomaly Type',
-                            data: data,
-                            backgroundColor: 'rgba(251, 191, 36, 0.6)',
-                            borderColor: 'rgba(251, 191, 36, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            x: {
-                                title: { display: true, text: 'Number of Occurrences', color: '#fff' },
-                                ticks: { color: '#fff', beginAtZero: true, stepSize: 1 }
-                            },
-                            y: { ticks: { color: '#fff' } }
-                        }
-                    }
-                });
-            }
-
-            function initRiskChart(data) {
-                const ctx = document.getElementById('riskChart').getContext('2d');
-                if (riskChart) riskChart.destroy();
-                riskChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['High Risk', 'Medium Risk', 'Low Risk'],
-                        datasets: [{
-                            data: [data.high || 0, data.medium || 0, data.low || 0],
-                            backgroundColor: ['#ef4444', '#f59e0b', '#10b981'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true, maintainAspectRatio: false,
-                        plugins: { legend: { position: 'bottom', labels: { color: '#fff', font: { size: 12 }}},
-                            tooltip: { callbacks: { label: (c) => `${c.label}: ${c.raw}%` }}
-                        }
-                    }
-                });
-            }
-
-            function initTrendsChart(trends) {
-                const ctx = document.getElementById('trendsChart').getContext('2d');
-                if (trendsChart) trendsChart.destroy();
-                trendsChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: trends.map(item => item.year),
-                        datasets: [{
-                            label: 'Anomalies per Year',
-                            data: trends.map(item => item.count),
-                            borderColor: 'rgba(59, 130, 246, 1)',
-                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                            fill: true,
-                            tension: 0.1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: true, labels: { color: '#fff', font: { size: 12 }}}},
-                        scales: {
-                            x: { title: { display: true, text: 'Year', color: '#fff' }, ticks: { color: '#fff' }},
-                            y: { title: { display: true, text: 'Anomaly Count', color: '#fff' }, beginAtZero: true, ticks: { color: '#fff' }}
-                        }
-                    }
-                });
-            }
-
-            async function analyze() {
-                const analyzeBtn = document.getElementById('analyze-btn');
-                const progressStatus = document.getElementById('progress-status');
-                const analysisResult = document.getElementById('analysis-result');
-                
-                analyzeBtn.disabled = true;
-                progressStatus.innerHTML = '<i data-lucide="loader" class="h-4 w-4 mr-1 animate-spin"></i> Analyzing data...';
-                lucide.createIcons();
-                
-                try {
-                    const response = await fetch('/api/analyze', { method: 'POST' });
-                    lastAnalysisData = await response.json();
-                    
-                    if (response.ok) {
-                        document.getElementById('summary').textContent = lastAnalysisData.summary || 'No summary available';
-                        
-                        const anomalies = lastAnalysisData.anomalies || [];
-                        const totalSavings = anomalies.reduce((sum, anomaly) => (sum + (employeeMasterData.get(anomaly.emp_id) || 0)), 0);
-                        
-                        animateValue(document.getElementById('potentialSavings'), 0, totalSavings, 1500);
-                        animateValue(document.getElementById('flaggedAnomalies'), 0, anomalies.length, 1500);
-                        
-                        renderAnomaliesTable();
-                        if (lastAnalysisData.risk_distribution) initRiskChart(lastAnalysisData.risk_distribution);
-                        if (lastAnalysisData.trends) initTrendsChart(lastAnalysisData.trends);
-                        if (lastAnalysisData.anomalies) initTypeChart(lastAnalysisData.anomalies);
-                        
-                        progressStatus.innerHTML = '<i data-lucide="check-circle" class="h-4 w-4 mr-1 text-success-400"></i> Analysis complete';
-                        analysisResult.textContent = `Found ${anomalies.length} anomalies`;
-                    } else {
-                        throw new Error(lastAnalysisData.error || 'Analysis failed');
-                    }
-                } catch (error) {
-                    console.error('Analysis error:', error);
-                    progressStatus.innerHTML = '<i data-lucide="x-circle" class="h-4 w-4 mr-1 text-error-400"></i> Analysis failed';
-                    analysisResult.textContent = error.message;
-                } finally {
-                    analyzeBtn.disabled = false;
-                    lucide.createIcons();
-                }
-            }
-
-            async function fetchDashboardData() {
-                try {
-                    const statsRes = await fetch('/api/dashboard/stats');
-                    const stats = await statsRes.json();
-                    document.getElementById('totalEmployees').textContent = stats.totalEmployees || 0;
-                    document.getElementById('flaggedAnomalies').textContent = stats.flaggedAnomalies || 0;
-                    document.getElementById('potentialSavings').textContent = `$${stats.potentialSavings.toLocaleString()}`;
-                    document.getElementById('dataAccuracy').textContent = `${stats.dataAccuracy}%`;
-
-                    const pendingAnomalies = stats.pendingAnomalies || 0;
-                    const alertBanner = document.getElementById('alertBanner');
-                    if (pendingAnomalies > 0) {
-                        alertBanner.classList.remove('hidden');
-                        document.getElementById('pendingAnomaliesCount').textContent = pendingAnomalies;
-                    }
-                } catch (error) {
-                    console.error('Error fetching dashboard data:', error);
-                }
-            }
-
-            async function fetchRecentUploads() {
-                try {
-                    const res = await fetch('/api/file-uploads');
-                    const uploads = await res.json();
-                    const activityFeed = document.getElementById('activityFeed');
-                    activityFeed.innerHTML = '';
-                    uploads.forEach(upload => {
-                        const li = document.createElement('li');
-                        li.className = 'flex items-center justify-between py-2';
-                        li.innerHTML = `
-                            <div class="flex items-center space-x-3">
-                                <i data-lucide="file-text" class="h-4 w-4 text-blue-400"></i>
-                                <span class="text-sm text-gray-100">${upload.filename}</span>
-                            </div>
-                            <span class="text-sm text-gray-400">${new Date(upload.created_at).toLocaleDateString()}</span>
-                        `;
-                        activityFeed.appendChild(li);
-                    });
-                    lucide.createIcons();
-                } catch (error) {
-                    console.error('Error fetching recent uploads:', error);
-                }
-            }
         });
+
+        // --- NEW CHART: Anomaly Type Distribution ---
+        function initTypeChart(anomaliesData) {
+            const ctx = document.getElementById('typeChart').getContext('2d');
+            if (typeChart) {
+                typeChart.destroy();
+            }
+
+            const typeCounts = {};
+            if (anomaliesData && anomaliesData.length > 0) {
+                anomaliesData.forEach(anomaly => {
+                    const type = anomaly.type || 'Unknown';
+                    typeCounts[type] = (typeCounts[type] || 0) + 1;
+                });
+            }
+
+            const labels = Object.keys(typeCounts);
+            const data = Object.values(typeCounts);
+
+            typeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Count of Anomaly Type',
+                        data: data,
+                        backgroundColor: 'rgba(251, 191, 36, 0.6)',
+                        borderColor: 'rgba(251, 191, 36, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Horizontal bar chart
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Number of Occurrences', color: '#fff' },
+                            ticks: { color: '#fff', beginAtZero: true, stepSize: 1 }
+                        },
+                        y: { ticks: { color: '#fff' } }
+                    }
+                }
+            });
+        }
+
+        function initRiskChart(data) {
+            const ctx = document.getElementById('riskChart').getContext('2d');
+            if (riskChart) riskChart.destroy();
+            riskChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['High Risk', 'Medium Risk', 'Low Risk'],
+                    datasets: [{
+                        data: [data.high || 0, data.medium || 0, data.low || 0],
+                        backgroundColor: ['#ef4444', '#f59e0b', '#10b981'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#fff', font: { size: 12 }}},
+                        tooltip: { callbacks: { label: (c) => `${c.label}: ${c.raw}%` }}
+                    }
+                }
+            });
+        }
+
+        function initTrendsChart(trends) {
+            const ctx = document.getElementById('trendsChart').getContext('2d');
+            if (trendsChart) trendsChart.destroy();
+            trendsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: trends.map(item => item.year),
+                    datasets: [{
+                        label: 'Anomalies per Year',
+                        data: trends.map(item => item.count),
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: true, labels: { color: '#fff', font: { size: 12 }}}},
+                    scales: {
+                        x: { title: { display: true, text: 'Year', color: '#fff' }, ticks: { color: '#fff' }},
+                        y: { title: { display: true, text: 'Anomaly Count', color: '#fff' }, beginAtZero: true, ticks: { color: '#fff' }}
+                    }
+                }
+            });
+        }
+
+        async function analyze() {
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const progressStatus = document.getElementById('progress-status');
+            const analysisResult = document.getElementById('analysis-result');
+            
+            analyzeBtn.disabled = true;
+            progressStatus.innerHTML = '<i data-lucide="loader" class="h-4 w-4 mr-1 animate-spin"></i> Analyzing data...';
+            lucide.createIcons();
+            
+            try {
+                const response = await fetch('/api/analyze', { method: 'POST' });
+                lastAnalysisData = await response.json(); // Store full data
+                
+                if (response.ok) {
+                    document.getElementById('summary').textContent = lastAnalysisData.summary || 'No summary available';
+                    
+                    const anomalies = lastAnalysisData.anomalies || [];
+                    const totalSavings = anomalies.reduce((sum, anomaly) => (sum + (employeeMasterData.get(anomaly.emp_id) || 0)), 0);
+                    
+                    // --- Use Animated Stats ---
+                    animateValue(document.getElementById('potentialSavings'), 0, totalSavings, 1500);
+                    animateValue(document.getElementById('flaggedAnomalies'), 0, anomalies.length, 1500);
+                    
+                    // --- Render table, then charts ---
+                    renderAnomaliesTable();
+                    if (lastAnalysisData.risk_distribution) initRiskChart(lastAnalysisData.risk_distribution);
+                    if (lastAnalysisData.trends) initTrendsChart(lastAnalysisData.trends);
+                    if (lastAnalysisData.anomalies) initTypeChart(lastAnalysisData.anomalies);
+                    
+                    progressStatus.innerHTML = '<i data-lucide="check-circle" class="h-4 w-4 mr-1 text-success-400"></i> Analysis complete';
+                    analysisResult.textContent = `Found ${anomalies.length} anomalies`;
+                } else {
+                    throw new Error(lastAnalysisData.error || 'Analysis failed');
+                }
+            } catch (error) {
+                console.error('Analysis error:', error);
+                progressStatus.innerHTML = '<i data-lucide="x-circle" class="h-4 w-4 mr-1 text-error-400"></i> Analysis failed';
+                analysisResult.textContent = error.message;
+            } finally {
+                analyzeBtn.disabled = false;
+                lucide.createIcons();
+            }
+        }
+
+        async function fetchDashboardData() {
+            try {
+                const statsRes = await fetch('/api/dashboard/stats');
+                const stats = await statsRes.json();
+                document.getElementById('totalEmployees').textContent = stats.totalEmployees || 0;
+                document.getElementById('flaggedAnomalies').textContent = stats.flaggedAnomalies || 0;
+                document.getElementById('potentialSavings').textContent = `$${stats.potentialSavings.toLocaleString()}`;
+                document.getElementById('dataAccuracy').textContent = `${stats.dataAccuracy}%`;
+
+                const pendingAnomalies = stats.pendingAnomalies || 0;
+                const alertBanner = document.getElementById('alertBanner');
+                if (pendingAnomalies > 0) {
+                    alertBanner.classList.remove('hidden');
+                    document.getElementById('pendingAnomaliesCount').textContent = pendingAnomalies;
+                }
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+            }
+        }
+
+        async function fetchRecentUploads() {
+            try {
+                const res = await fetch('/api/file-uploads');
+                const uploads = await res.json();
+                const activityFeed = document.getElementById('activityFeed');
+                activityFeed.innerHTML = '';
+                uploads.forEach(upload => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center justify-between py-2';
+                    li.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="file-text" class="h-4 w-4 text-blue-400"></i>
+                            <span class="text-sm text-gray-100">${upload.filename}</span>
+                        </div>
+                        <span class="text-sm text-gray-400">${new Date(upload.created_at).toLocaleDateString()}</span>
+                    `;
+                    activityFeed.appendChild(li);
+                });
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Error fetching recent uploads:', error);
+            }
+        }
+    });
     </script>
 </body>
 </html>
