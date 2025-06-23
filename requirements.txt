@@ -3,3 +3,4 @@ Flask-SQLAlchemy
 pandas
 google-generativeai 
 reportlab
+gunicorn==21.2.0
