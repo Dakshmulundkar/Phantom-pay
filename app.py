@@ -21,7 +21,7 @@ db = SQLAlchemy(app)
 
 # reCAPTCHA verification
 def verify_recaptcha(token):
-    secret_key = "6Lfqz1grAAAAAJVszTEMo79zPR78AbBu4y_kkfEa"
+    secret_key = "YOUR SECRET KEY"                                                                                               //S
     payload = {'secret': secret_key, 'response': token}
     response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=payload)
     return response.json().get('success', False)
@@ -122,7 +122,7 @@ def all_files_uploaded():
 def get_uploaded_file_data(file_type):
     return current_files.get(file_type)
 
-genai.configure(api_key="AIzaSyAdYNj3eUf0_-W3yO25_Yag-23rIIUOzLQ")
+genai.configure(api_key="YOUR API KEY")                                                                        //D
 
 model_name = "models/gemini-1.5-flash"
 model = genai.GenerativeModel(model_name)
