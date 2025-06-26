@@ -408,7 +408,7 @@ def analyze_form():
     recaptcha_response = request.form.get('g-recaptcha-response')
 
     # Verify with Google
-    secret_key = "6Lfqz1grAAAAAJVszTEMo79zPR78AbBu4y_kkfEa"
+    secret_key = "YOUR SECRET KEY"                                     //S
     payload = {
         'secret': secret_key,
         'response': recaptcha_response
